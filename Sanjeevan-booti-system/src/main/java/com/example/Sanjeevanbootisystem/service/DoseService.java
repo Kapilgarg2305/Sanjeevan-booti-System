@@ -18,34 +18,6 @@ public class DoseService {
     @Autowired
     PersonRepository personRepository;
 
-//    public Dose getDose1(int personId, DoseType doseType) {
-//
-//        Optional<Person> optionalPerson = personRepository.findById(personId);
-//
-//        // check if person exists or not
-//        if(!optionalPerson.isPresent()){
-//            throw new PersonNotFoundException("Invalid PersonId");
-//        }
-//
-//        Person person = optionalPerson.get();
-//        // check if dose 1 is already taken
-//        if(person.isDose1Taken()){
-//            throw new DoseAlreadyTakenException("Dose 1 already taken");
-//        }
-//
-//        // Create a Dose
-//        Dose dose = new Dose();
-//        dose.setDoseId(String.valueOf(UUID.randomUUID()));
-//        dose.setDoseType(doseType);
-//        dose.setPerson(person);
-//
-//        person.setDose1Taken(true);
-//        person.getDosesTaken().add(dose);
-//        Person savedPerson = personRepository.save(person);
-//
-//        return savedPerson.getDosesTaken().get(0);
-//    }
-
     public Dose getDose1(BookDose1RequestDto bookDose1RequestDto) {
 
         Optional<Person> optionalPerson = personRepository.findById(bookDose1RequestDto.getPersonId());
@@ -83,9 +55,9 @@ public class DoseService {
         }
 
         Person person = optionalPerson.get();
-        // check if dose 1 is already taken
-        if(person.isDose1Taken()){
-            throw new DoseAlreadyTakenException("Dose 1 already taken");
+        // check if dose 2 is already taken
+        if(person.isDose2Taken()){
+            throw new DoseAlreadyTakenException("Dose 2 already taken");
         }
 
         // Create a Dose from RequestDto
@@ -94,7 +66,7 @@ public class DoseService {
         dose.setDoseType(bookDose2RequestDto.getDoseType());
         dose.setPerson(person);
 
-        person.setDose1Taken(true);
+        person.setDose2Taken(true);
         person.getDosesTaken().add(dose);
         Person savedPerson = personRepository.save(person);
 
